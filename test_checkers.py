@@ -12,7 +12,6 @@ def test_initial_turn(game_control):
     # Testa se o turno inicial é configurado corretamente
     assert game_control.get_turn() == "W"
 
-
 def test_get_winner_no_winner(game_control):
     # Testa se não há vencedor no início
     assert game_control.get_winner() is None
@@ -28,18 +27,6 @@ def test_release_piece_without_holding(game_control):
     result = game_control.release_piece()
     assert not result
 
-
-def test_display_turn_message(game_control):
-    # Testa mensagem do turno exibida corretamente
-    turn_message = "White's turn" if game_control.get_turn() == "W" else "Black's turn"
-    assert turn_message == "White's turn"
-
-def test_winner_message(game_control):
-    # Testa mensagem de vencedor
-    game_control.get_winner = MagicMock(return_value="W")
-    winner_message = "White wins!" if game_control.get_winner() == "W" else "Black wins!"
-    assert winner_message == "White wins!"
-
 def test_game_loop(game_control):
     for _ in range(10):  # Simula 10 turnos do jogo
         assert game_control.get_turn() in ["W", "B"]
@@ -47,12 +34,10 @@ def test_game_loop(game_control):
             break  # Termina o loop se houver vencedor
     assert game_control.get_winner() is None  # Garantia de que ninguém venceu ainda
 
-
 def test_move_conditions(game_control):
     valid_position = (2, 2)  # Substituir por uma posição válida
     game_control.hold_piece(valid_position)
     assert game_control.get_turn() == "W"  # Verifica condição do turno
-    
 
 def test_get_turn_returns(game_control):
     # Testa os valores retornados pelo turno
